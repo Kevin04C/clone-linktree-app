@@ -22,7 +22,7 @@ export interface LoginResponse {
   token: string
 }
 
-export interface LoginErrorResponse {
+export interface AuthErrorResponse {
   ok: boolean
   msg: string
 }
