@@ -115,6 +115,7 @@ export const RegisterUsernameEmail: FC<Props> = ({ verifyEmail, verifyUsername, 
               value={email}
               onChange={handleChangeEmail}
               onBlur={handleBlur}
+              autoComplete="off"
             />
             <div className="absolute right-4 top-2/4 -translate-y-2/4">
               {email !== '' && <VerifyDataUser status={emailRegistered.status} />}
