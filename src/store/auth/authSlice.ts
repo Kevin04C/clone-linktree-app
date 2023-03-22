@@ -3,21 +3,22 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ValidateRegisterData, User, DataRegister } from './interfaces/interfaces'
 
 interface AuthState {
-  loadApp: boolean
+  loadingApp: boolean
   checkingCredential: boolean
   user: User | null
-  error: string
+  error: string | null
   success: string
   validateDataRegister: ValidateRegisterData
   dataRegister: DataRegister
+  registerSuccess: boolean
 }
 
 const initialState: AuthState = {
   checkingCredential: false,
   user: null,
-  error: '',
+  error: null,
   success: '',
-  loadApp: false,
+  loadingApp: false,
   validateDataRegister: {
     username: {
       status: 'checking',
@@ -31,7 +32,8 @@ const initialState: AuthState = {
   dataRegister: {
     username: '',
     email: ''
-  }
+  },
+  registerSuccess: false
 }
 
 export const authSlice = createSlice({
@@ -41,16 +43,19 @@ export const authSlice = createSlice({
     checkingCredential: (state) => {
       state.checkingCredential = true
     },
+    loadApp: (state) => {
+      state.loadingApp = true
+    },
 
     login: (state, action: PayloadAction<User>) => {
       const { payload } = action
       state.user = payload
       state.checkingCredential = false
-      state.loadApp = false
+      state.loadingApp = false
     },
 
     errorAuth: (state, action: PayloadAction<string>) => {
-      state.loadApp = false
+      state.loadingApp = false
       state.checkingCredential = false
       state.user = null
       state.error = action.payload
@@ -58,7 +63,7 @@ export const authSlice = createSlice({
     },
 
     logout: (state) => {
-      state.loadApp = false
+      state.loadingApp = false
       state.checkingCredential = false
       state.user = null
       state.error = ''
@@ -102,6 +107,10 @@ export const authSlice = createSlice({
     clearDataRegister: (state) => {
       state.dataRegister.username = ''
       state.dataRegister.email = ''
+    },
+    registerSuccess: (state) => {
+      state.registerSuccess = true
+      state.checkingCredential = false
     }
   }
 })
@@ -118,5 +127,7 @@ export const {
   deniedEmail,
   checkingEmail,
   setEmailPassword,
-  clearDataRegister
+  clearDataRegister,
+  registerSuccess,
+  loadApp
 } = authSlice.actions
