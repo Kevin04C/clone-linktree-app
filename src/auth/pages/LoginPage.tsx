@@ -11,6 +11,7 @@ import { useStore } from '../../hooks/useStore'
 import { Logo } from '../../ui/Logo'
 import { Button } from '../../ui/Button'
 import { ErrorMessageAuth } from '../components/ErrorMessageAuth'
+import { ClipLoader } from 'react-spinners'
 interface LoginValues {
   username: string
   password: string
@@ -23,7 +24,7 @@ const initialValues: LoginValues = {
 
 export const LoginPage: FC = () => {
   const { dispatch, store } = useStore()
-  const { error } = store.auth
+  const { error, checkingCredential } = store.auth
   const onSubmit = (data: LoginValues): void | Promise<void> => {
     dispatch(startLogin(data))
   }
@@ -73,7 +74,7 @@ export const LoginPage: FC = () => {
               </div>
               {error !== null && <ErrorMessageAuth message={error} />}
               <Button className="mt-8 mb-5" type="submit" disabled={!isValid}>
-                Log in
+                {checkingCredential ? <ClipLoader size={25} color="#fff" /> : 'Log in'}
               </Button>
               <LoginWithGoogle />
             </form>
