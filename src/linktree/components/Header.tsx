@@ -17,7 +17,7 @@ export const Header: FC = () => {
   }
 
   return (
-    <header className="w-full bg-white md:rounded-full shadow fixed">
+    <header className="sticky top-0 bg-white md:rounded-full shadow ">
       <nav className="px-4 py-2 justify-between flex gap-5 items-center flex-wrap relative content-around">
         <GiClover className="text-neutral-800 mr-3" size={22} />
         <div className="w-full items-center flex gap-4 order-2 md:order-1 md:w-auto grow">
