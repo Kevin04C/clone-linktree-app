@@ -9,6 +9,9 @@ import { clearDataRegister } from '../../store/auth/authSlice'
 import { ErrorMessageAuth } from '../components/ErrorMessageAuth'
 import { Button } from '../../ui/Button'
 import { startRegister } from '../../store/auth/thunks'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ClipLoader } from 'react-spinners'
 
 interface Props {
   dataInvalid: () => void
@@ -23,8 +26,10 @@ const initialValues: RegisterPasswordValues = {
 }
 
 export const RegisterPassword: FC<Props> = ({ dataInvalid }) => {
+  const navigate = useNavigate()
   const { dispatch, store } = useStore()
   const { username, email } = store.auth.dataRegister
+  const { registerSuccess, checkingCredential } = store.auth
   const { handleSeePassword, seePassword, inputPasswordRef } = useSeePassword()
 
   const onSubmit = (data: RegisterPasswordValues): void => {
@@ -48,7 +53,11 @@ export const RegisterPassword: FC<Props> = ({ dataInvalid }) => {
     dispatch(clearDataRegister())
   }
 
-  console.log(errors)
+  useEffect(() => {
+    if (registerSuccess) {
+      navigate('/auth/register/confirmation', { replace: true })
+    }
+  }, [registerSuccess])
 
   return (
     <div>
@@ -88,7 +97,7 @@ export const RegisterPassword: FC<Props> = ({ dataInvalid }) => {
             )}
           </div>
           <Button type="submit" className="mt-10 mb-5" disabled={!isValid}>
-            Continue
+            {checkingCredential ? <ClipLoader size={25} color="#fff" /> : 'Continue'}
           </Button>
         </form>
       </div>
