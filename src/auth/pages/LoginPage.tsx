@@ -10,6 +10,7 @@ import { startLogin } from '../../store/auth/thunks'
 import { useStore } from '../../hooks/useStore'
 import { Logo } from '../../ui/Logo'
 import { Button } from '../../ui/Button'
+import { ErrorMessageAuth } from '../components/ErrorMessageAuth'
 interface LoginValues {
   username: string
   password: string
@@ -21,8 +22,8 @@ const initialValues: LoginValues = {
 }
 
 export const LoginPage: FC = () => {
-  const { dispatch } = useStore()
-
+  const { dispatch, store } = useStore()
+  const { error } = store.auth
   const onSubmit = (data: LoginValues): void | Promise<void> => {
     dispatch(startLogin(data))
   }
@@ -46,7 +47,7 @@ export const LoginPage: FC = () => {
             <h3 className="font-bold text-[30px] text-center tracking-[-1px] lg:text-left lg:text-5xl lg:tracking-[-2px] mb-12">
               Log in to your Clonetree
             </h3>
-            <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
+            <form onSubmit={handleSubmit} className="w-full ">
               <input
                 type="text"
                 placeholder="Username"
@@ -70,7 +71,8 @@ export const LoginPage: FC = () => {
                 />
                 <SeePassword see={seePassword} changeSeePassword={handleSeePassword} />
               </div>
-              <Button className="mt-10 mb-5" type="submit" disabled={!isValid}>
+              {error !== null && <ErrorMessageAuth message={error} />}
+              <Button className="mt-8 mb-5" type="submit" disabled={!isValid}>
                 Log in
               </Button>
               <LoginWithGoogle />
