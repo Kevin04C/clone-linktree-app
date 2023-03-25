@@ -17,14 +17,14 @@ export const Header: FC = () => {
   }
 
   return (
-    <header className="sticky top-0 bg-white md:rounded-full shadow ">
+    <header className="sticky top-0 bg-white md:rounded-full shadow z-10">
       <nav className="px-4 py-2 justify-between flex gap-5 items-center flex-wrap relative content-around">
         <GiClover className="text-neutral-800 mr-3" size={22} />
         <div className="w-full items-center flex gap-4 order-2 md:order-1 md:w-auto grow">
-          <LinkHeader to="#" icon={<IoUnlinkSharp />} title="Links" />
-          <LinkHeader to="#" icon={<IoShapesOutline />} title="Appearance" />
+          <LinkHeader to="/" icon={<IoUnlinkSharp />} title="Links" />
+          <LinkHeader to="/appareance" icon={<IoShapesOutline />} title="Appearance" />
           <LinkHeader
-            to="#"
+            to="/more"
             icon={<img src={photoUrl} alt={username} className="w-6 h-6 rounded-full" />}
             title="More"
             className="md:hidden"
