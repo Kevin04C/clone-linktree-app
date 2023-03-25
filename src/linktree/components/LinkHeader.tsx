@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 interface Props {
   to: string
@@ -9,16 +9,22 @@ interface Props {
 }
 
 export const LinkHeader: FC<Props> = ({ to, icon, title, className }) => {
+  const baseClass =
+    'w-full md:w-auto flex  flex-col md:flex-row justify-center items-center gap-2 md:p-2 md:rounded-md md: md:hover:bg-input transition-all grow md:grow-0 font-semibold'
   return (
-    <Link
+    <NavLink
       to={to}
-      className={`
-      w-full md:w-auto flex  flex-col md:flex-row justify-center items-center gap-2 md:p-2 rounded-md text-stone-600 hover:bg-input transition-all grow md:grow-0 ${
-        className as string
-      }`}
+      className={({ isActive }) =>
+        isActive
+          ? `${baseClass} text-stone-900 border-b border-black md:border-none  ${
+              className as string
+            }`
+          : `
+      ${baseClass} text-stone-500 ${className as string}`
+      }
     >
       {icon}
-      <span className="font-semibold text-[14px] md:text-base">{title}</span>
-    </Link>
+      <span className="text-[14px] md:text-base">{title}</span>
+    </NavLink>
   )
 }
