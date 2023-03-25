@@ -1,15 +1,14 @@
-import type { FC, ReactNode } from 'react'
+import type { FC } from 'react'
+import { Outlet } from 'react-router-dom'
 import { Header } from '../components/Header'
 
-interface Props {
-  children: ReactNode
-}
-
-export const Layout: FC<Props> = ({ children }) => {
+export const Layout: FC = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="md:p-2 min-h-screen bg-input">
       <Header />
-      <div className="md:p-2">{children}</div>
+      <div className="md:p-2">
+        <Outlet />
+      </div>
     </div>
   )
 }
