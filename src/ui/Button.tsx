@@ -5,9 +5,10 @@ interface Props {
   className?: string
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
+  handleClick?: () => void
 }
 
-export const Button: FC<Props> = ({ children, className, type, disabled }) => {
+export const Button: FC<Props> = ({ children, className, type, disabled, handleClick }) => {
   return (
     <>
       <button
@@ -16,6 +17,7 @@ export const Button: FC<Props> = ({ children, className, type, disabled }) => {
         } ${disabled === true ? 'grayscale cursor-not-allowed' : ''}`}
         type={type}
         disabled={disabled}
+        onClick={handleClick}
       >
         {children}
       </button>
