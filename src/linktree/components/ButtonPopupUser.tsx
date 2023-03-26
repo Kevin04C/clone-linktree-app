@@ -12,7 +12,7 @@ export const ButtonPopupUser: FC<Props> = ({ title, to, icon }) => {
     <>
       <Link
         to={to}
-        className="text-gray-700 flex gap-4 items-center hover:bg-stone-100 p-2 rounded-xl"
+        className="text-gray-700 flex gap-4 items-center hover:bg-stone-100 px-2 py-4 rounded-xl"
       >
         {icon}
         <span className="font-normal">{title}</span>
