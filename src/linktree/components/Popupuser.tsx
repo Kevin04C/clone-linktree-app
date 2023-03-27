@@ -1,9 +1,8 @@
 import type { FC } from 'react'
 import { useStore } from '../../hooks/useStore'
 import type { User } from '../../store/auth/interfaces/interfaces'
-import { ButtonPopupUser } from './ButtonPopupUser'
-import { RiAccountBoxLine } from 'react-icons/ri'
 import { ButtonLogout } from './ButtonLogout'
+import { ButtonMyAccount } from './ButtonMyAccount'
 
 export const PopupUser: FC = () => {
   const { store } = useStore()
@@ -12,9 +11,9 @@ export const PopupUser: FC = () => {
 
   return (
     <aside
-      className={`w-[300px] opacity-0 pointer-events-none absolute bg-white rounded-lg right-0 top-12 shadow-sm animate__animated ${
+      className={`w-[300px] absolute bg-white rounded-lg right-0 top-12 shadow-sm animate__animated ${
         showPopupUser
-          ? 'opacity-100 pointer-events-auto animate__fadeIn animate__faster'
+          ? 'opacity-100 pointer-events-auto animate__fadeIn animate__faster -z-20'
           : 'opacity-0 pointer-events-none'
       }`}
     >
@@ -30,7 +29,7 @@ export const PopupUser: FC = () => {
         </div>
         <div className="mt-5">
           <h3 className="text-gray-500 font-semibold mb-2">Account</h3>
-          <ButtonPopupUser icon={<RiAccountBoxLine size={20} />} title="Account" to="#" />
+          <ButtonMyAccount />
         </div>
         <div className="mt-1">
           <ButtonLogout />
