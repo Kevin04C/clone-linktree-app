@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import { Button } from '../../ui/Button'
 import { IoAdd } from 'react-icons/io5'
 import { useStore } from '../../hooks/useStore'
-import { newLink } from '../../store/clonetree/cloneTree'
+import { newLink } from '../../store/clonetree/cloneTreeSlice'
 
 export const AddNewLink: FC = () => {
   const { dispatch } = useStore()
