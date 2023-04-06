@@ -6,7 +6,7 @@ import { ErrorMessageAuth } from '../components/ErrorMessageAuth'
 import { useFormik } from 'formik'
 import { validationUsernameAndEmail } from '../validations/validationsAuth'
 import { useDebounce } from '../../hooks/useDebounce'
-import { setEmailPassword } from '../../store/auth/authSlice'
+import { setEmailPassword, clearDataRegister } from '../../store/auth/authSlice'
 import { Button } from '../../ui/Button'
 
 interface Props {
@@ -31,6 +31,10 @@ export const RegisterUsernameEmail: FC<Props> = ({ verifyEmail, verifyUsername, 
   const [fieldsValids, setFieldsValids] = useState(false)
   const { store } = useStore()
   const { username: usernameRegistered, email: emailRegistered } = store.auth.validateDataRegister
+
+  useEffect(() => {
+    dispatch(clearDataRegister())
+  }, [])
 
   const handleCreateAccount = (data: RegisterValues): void => {
     dataValid()
