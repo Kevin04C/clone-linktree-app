@@ -70,7 +70,7 @@ export const LinkItem: FC<Props> = ({ link }) => {
         </div>
         <div className="flex justify-end mt-3">
           <button
-            className={`p-1 hover:bg-stone-100 rounded-md ${
+            className={`p-1 rounded-md ${
               isDeleteOptions ? 'bg-purple-800 text-white hover:bg-purple-900' : 'text-slate-400'
             }`}
             onClick={handleOpenOptionsDelete}
