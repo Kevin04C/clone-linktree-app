@@ -20,7 +20,6 @@ const initialValues: NewLinkState = {
 export const NewLinkForm: FC = () => {
   const { dispatch, store } = useStore()
   const { status } = store.cloneTree
-  console.log(status)
 
   const onSubmit = (data: NewLinkState): void => {
     const { url } = data
