@@ -6,12 +6,14 @@ interface CloneTreeState {
   newLink: boolean
   links: Link[]
   status: 'addingLink' | 'loadingLinks' | null
+  activeLink: Link | null
 }
 
 const initialState: CloneTreeState = {
   newLink: false,
   links: [],
-  status: null
+  status: null,
+  activeLink: null
 }
 
 export const clonTreeSlice = createSlice({
@@ -35,8 +37,18 @@ export const clonTreeSlice = createSlice({
     setLinks: (state, action: PayloadAction<Link[]>) => {
       const { payload } = action
       state.links = payload
+    },
+    updateLink: (state, action: PayloadAction<Link>) => {
+      const { payload } = action
+      const linkIndex = state.links.findIndex((link) => link.id === payload.id)
+      state.links[linkIndex] = payload
+    },
+    deleteLink: (state, action: PayloadAction<number>) => {
+      const { payload } = action
+      state.links = state.links.filter((link) => link.id !== payload)
     }
   }
 })
 
-export const { newLink, cancelNewLink, addNewLink, addingLink } = clonTreeSlice.actions
+export const { newLink, cancelNewLink, addNewLink, addingLink, setLinks, updateLink, deleteLink } =
+  clonTreeSlice.actions
