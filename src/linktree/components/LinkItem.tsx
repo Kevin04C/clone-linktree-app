@@ -61,12 +61,7 @@ export const LinkItem: FC<Props> = ({ link }) => {
               />
             </div>
           </div>
-          <LinkSwitch
-            active={active}
-            toggleSwicth={toggleActive}
-            updateLink={updateLink}
-            valuesLink={valuesLink}
-          />
+          <LinkSwitch active={active} toggleSwicth={toggleActive} valuesLink={valuesLink} />
         </div>
         <div className="flex justify-end mt-3">
           <button
