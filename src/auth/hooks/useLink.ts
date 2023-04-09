@@ -49,13 +49,16 @@ export const useLink = ({ id, title, url, active }: Props): ReturnUseLink => {
     validationValues()
   }, [valuesLink])
 
+  useEffect(() => {
+    updateLink(valuesLink)
+  }, [valuesLink.active])
+
   const toggleActive = (): void => {
     const newState: Link = {
       ...valuesLink,
       active: valuesLink.active === 0 ? 1 : 0
     }
     setValuesLink(newState)
-    updateLink(newState)
   }
 
   const updateLink = (link: Link): void => {
