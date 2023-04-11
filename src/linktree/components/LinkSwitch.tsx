@@ -1,10 +1,8 @@
 import type { FC } from 'react'
-import type { Link } from '../../store/clonetree/interfaces/interfaces'
 
 interface Props {
   active: 1 | 0
   toggleSwicth: () => void
-  valuesLink: Link
 }
 
 export const LinkSwitch: FC<Props> = ({ active, toggleSwicth }) => {

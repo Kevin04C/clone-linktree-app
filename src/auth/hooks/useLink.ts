@@ -2,7 +2,7 @@ import type { ChangeEvent } from 'react'
 import { useState, useEffect } from 'react'
 import type { Link } from '../../store/clonetree/interfaces/interfaces'
 import type { ValidationError } from 'yup'
-import { validationUseLink } from '../../linktree/validations/validationUseLink'
+import { validationUseLink } from '../validations/validationUseLink'
 import { useStore } from '../../hooks/useStore'
 import { startUpdateLink } from '../../store/clonetree/thunks'
 

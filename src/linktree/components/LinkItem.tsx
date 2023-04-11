@@ -5,9 +5,9 @@ import { LinkSwitch } from './LinkSwitch'
 import { LinkInputEditable } from './LinkInputEditable'
 import { useLink } from '../../auth/hooks/useLink'
 import { useStore } from '../../hooks/useStore'
-import { useState } from 'react'
 import { DeleteOptions } from './DeleteOptions'
 import { startDeleteLink } from '../../store/clonetree/thunks'
+import { useDelete } from '../hooks/useDelete'
 
 interface Props {
   link: Link
@@ -18,19 +18,11 @@ export const LinkItem: FC<Props> = ({ link }) => {
   const { valuesLink, updateLink, toggleActive, changeValues, errorValues } = useLink({
     ...link
   })
-  const [isDeleteOptions, setIsDeleteOptions] = useState(false)
-
-  const handleOpenOptionsDelete = (): void => {
-    isDeleteOptions ? setIsDeleteOptions(false) : setIsDeleteOptions(true)
-  }
+  const { forDelete, onTooggledDelete, cancelDelete } = useDelete()
 
   const handleDelete = (): void => {
     const { id } = link
     dispatch(startDeleteLink(id))
-  }
-
-  const handleCancelDelete = (): void => {
-    setIsDeleteOptions(false)
   }
 
   const { title, url, active } = valuesLink
@@ -66,18 +58,18 @@ export const LinkItem: FC<Props> = ({ link }) => {
         <div className="flex justify-end mt-3">
           <button
             className={`p-1 rounded-md ${
-              isDeleteOptions ? 'bg-purple-800 text-white hover:bg-purple-900' : 'text-slate-400'
+              forDelete ? 'bg-purple-800 text-white hover:bg-purple-900' : 'text-slate-400'
             }`}
-            onClick={handleOpenOptionsDelete}
+            onClick={onTooggledDelete}
           >
             <AiOutlineDelete size={20} className="text-inherit" />
           </button>
         </div>
       </div>
       <DeleteOptions
-        isActive={isDeleteOptions}
+        isActive={forDelete}
         handleDelete={handleDelete}
-        handleCancelDelete={handleCancelDelete}
+        handleCancelDelete={cancelDelete}
       />
     </article>
   )
