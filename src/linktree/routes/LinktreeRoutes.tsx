@@ -7,12 +7,14 @@ import { AppareancePage } from '../pages/AppareancePage'
 import { useStore } from '../../hooks/useStore'
 import { useEffect } from 'react'
 import { startGetLinks } from '../../store/clonetree/thunks'
+import { startGetHeaders } from '../../store/header/thunks'
 
 export const LinktreeRoutes: FC = () => {
   const { dispatch } = useStore()
 
   useEffect(() => {
     dispatch(startGetLinks())
+    dispatch(startGetHeaders())
   }, [])
 
   return (
