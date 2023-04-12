@@ -6,8 +6,8 @@ export const LinksList: FC = () => {
   const { store } = useStore()
   const { links } = store.cloneTree
   return (
-    <section>
-      <div className="mt-6 flex flex-col gap-4">
+    <section className="mt-6">
+      <div className="flex flex-col gap-4">
         {links.map((link) => (
           <LinkItem key={link.id} link={link} />
         ))}
