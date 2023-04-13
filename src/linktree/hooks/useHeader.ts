@@ -4,6 +4,7 @@ import { useStore } from '../../hooks/useStore'
 import { startUpdateHeader } from '../../store/header/thunks'
 import { useLimitWord } from './useLimitWord'
 import { useState, useEffect } from 'react'
+import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory'
 
 interface Props {
   header: Header
@@ -30,6 +31,7 @@ export const useHeader = ({ header }: Props): ReturnUseHeader => {
       initialText: textHeadline ?? '',
       limit: 35
     })
+  const [isFirstRender, setIsFirstRender] = useState(true)
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>): void => {
     const newText = evt.target.value
@@ -37,15 +39,19 @@ export const useHeader = ({ header }: Props): ReturnUseHeader => {
   }
 
   useEffect(() => {
+    setIsFirstRender(false)
+  }, [])
+
+  useEffect(() => {
     dispatch(startUpdateHeader({ id, headline: text, active: isActive }))
   }, [isActive])
 
   useEffect(() => {
-    if (numberOfWord === 0) {
+    if (numberOfWord === 0 && !isFirstRender) {
       setIsActive(0)
       dispatch(startUpdateHeader({ id, headline: text, active: 0 }))
     }
-  }, [numberOfWord])
+  }, [numberOfWord, isFirstRender])
 
   const updateHeader = (): void => {
     dispatch(startUpdateHeader({ id, headline: text, active }))
