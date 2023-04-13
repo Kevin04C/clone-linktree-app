@@ -40,8 +40,13 @@ export const clonTreeSlice = createSlice({
     },
     updateLink: (state, action: PayloadAction<Link>) => {
       const { payload } = action
-      const linkIndex = state.links.findIndex((link) => link.id === payload.id)
-      state.links[linkIndex] = payload
+      state.links = state.links.map((link) => {
+        if (Number(link.id) === Number(payload.id)) {
+          console.log('entre')
+          return payload
+        }
+        return link
+      })
     },
     deleteLink: (state, action: PayloadAction<number>) => {
       const { payload } = action
