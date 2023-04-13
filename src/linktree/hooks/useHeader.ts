@@ -4,7 +4,6 @@ import { useStore } from '../../hooks/useStore'
 import { startUpdateHeader } from '../../store/header/thunks'
 import { useLimitWord } from './useLimitWord'
 import { useState, useEffect } from 'react'
-import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory'
 
 interface Props {
   header: Header
